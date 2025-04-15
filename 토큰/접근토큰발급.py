@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import requests
 from config import MY_APP_KEY, MY_SECRET_KEY
 
@@ -29,7 +31,10 @@ import os
 from dotenv import load_dotenv
 
 # env 파일 업데이트 함수
-def update_env_file(key, value, env_file=".env.example"):
+def update_env_file(key, value, env_file=".env"):
+	# 현재 파일의 경로를 기준으로 프로젝트 루트 디렉터리의 .env 파일에 업데이트 합니다
+	env_file = Path(__file__).resolve().parent.parent / ".env"
+
 	# .env.example 파일 로드
 	load_dotenv(env_file)
 
@@ -51,9 +56,6 @@ def update_env_file(key, value, env_file=".env.example"):
 			file.write(f"{k}={v}\n")
 
 
-# 사용 예시
-update_env_file("MY_ACCESS_TOKEN", "new_generated_token_value")
-
 # 실행 구간
 if __name__ == '__main__':
 	# 1. 요청 데이터
@@ -67,5 +69,4 @@ if __name__ == '__main__':
 	my_access_token = fn_au10001(data=params).get('token')
 	print(my_access_token)
 	update_env_file("MY_ACCESS_TOKEN", my_access_token)
-
 

@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv()  # .env.example 파일에 있는 환경변수들을 로드
+load_dotenv()  # .env 파일에 있는 환경변수들을 로드
 
 MY_ACCESS_TOKEN = os.getenv("MY_ACCESS_TOKEN")
 MY_APP_KEY = os.getenv("MY_APP_KEY")
