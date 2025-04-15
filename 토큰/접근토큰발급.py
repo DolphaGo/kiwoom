@@ -29,8 +29,8 @@ import os
 from dotenv import load_dotenv
 
 # env 파일 업데이트 함수
-def update_env_file(key, value, env_file=".env"):
-	# .env 파일 로드
+def update_env_file(key, value, env_file=".env.example"):
+	# .env.example 파일 로드
 	load_dotenv(env_file)
 
 	# 기존 환경 변수 읽기
@@ -45,7 +45,7 @@ def update_env_file(key, value, env_file=".env"):
 	# 새로운 키-값 추가 또는 업데이트
 	env_vars[key] = value
 
-	# .env 파일에 다시 쓰기
+	# .env.example 파일에 다시 쓰기
 	with open(env_file, "w") as file:
 		for k, v in env_vars.items():
 			file.write(f"{k}={v}\n")
