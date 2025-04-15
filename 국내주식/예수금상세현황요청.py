@@ -1,6 +1,9 @@
 import requests
 import json
 
+from config import MY_ACCESS_TOKEN
+
+
 # 예수금상세현황요청
 def fn_kt00001(token, data, cont_yn='N', next_key=''):
 	# 1. 요청할 API URL
@@ -28,10 +31,8 @@ def fn_kt00001(token, data, cont_yn='N', next_key=''):
 
 # 실행 구간
 if __name__ == '__main__':
-	# 1. 토큰 설정
-	MY_ACCESS_TOKEN = 'IsetowAwUgEGDir8IZ7wu3ldLYvLjkokYBmT0OvmYSTP2YGgnlN_Gk1Er1ZYkGQCShL_zOwpJ652l65gTazn_g'# 접근토큰
 
-	# 2. 요청 데이터
+	# 요청 데이터
 	params = {
 		'qry_tp': '3', # 조회구분 3:추정조회, 2:일반조회
 	}

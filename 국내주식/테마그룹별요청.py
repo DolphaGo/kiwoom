@@ -29,10 +29,7 @@ def fn_ka90001(token, data, cont_yn='N', next_key=''):
 
 # 실행 구간
 if __name__ == '__main__':
-	# 1. 토큰 설정
-	# MY_ACCESS_TOKEN = '사용자 AccessToken'# 접근토큰
-
-	# 2. 요청 데이터
+	# 요청 데이터
 	params = {
 		'qry_tp': '0', # 검색구분 0:전체검색, 1:테마검색, 2:종목검색
 		'stk_cd': '', # 종목코드 검색하려는 종목코드

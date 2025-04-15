@@ -29,10 +29,7 @@ def fn_ka10001(token, data, cont_yn='N', next_key=''):
 
 # 실행 구간
 if __name__ == '__main__':
-	# 1. 토큰 설정
-	# MY_ACCESS_TOKEN = 'TOKEN'# 접근토큰
-
-	# 2. 요청 데이터
+	# 요청 데이터
 	params = {
 		'stk_cd': '005930', # 종목코드 거래소별 종목코드 (KRX:039490,NXT:039490_NX,SOR:039490_AL)
 	}
