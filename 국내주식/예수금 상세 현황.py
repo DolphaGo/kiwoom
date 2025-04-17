@@ -1,18 +1,24 @@
 import requests
 import json
-from config import MY_ACCESS_TOKEN, MY_APP_KEY, MY_SECRET_KEY  # 공통 설정 파일에서 토큰 가져오기
 
-# 접근토큰폐기
-def fn_au10002(data):
+from config import MY_ACCESS_TOKEN
+
+
+# 예수금상세현황요청
+def fn_kt00001(token, data, cont_yn='N', next_key=''):
 	# 1. 요청할 API URL
-	# host = 'https://mockapi.kiwoom.com' # 모의투자
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
 	host = 'https://api.kiwoom.com' # 실전투자
-	endpoint = '/oauth2/revoke'
+	endpoint = '/api/dostk/acnt'
 	url =  host + endpoint
 
 	# 2. header 데이터
 	headers = {
 		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'authorization': f'Bearer {token}', # 접근토큰
+		'cont-yn': cont_yn, # 연속조회여부
+		'next-key': next_key, # 연속조회키
+		'api-id': 'kt00001', # TR명
 	}
 
 	# 3. http POST 요청
@@ -25,13 +31,14 @@ def fn_au10002(data):
 
 # 실행 구간
 if __name__ == '__main__':
-	# 1. 요청 데이터
+	# 요청 데이터
 	params = {
-		'appkey': MY_APP_KEY,
-		'secretkey': MY_SECRET_KEY,
-		'token': MY_ACCESS_TOKEN,  # 토큰
+		'qry_tp': '3', # 조회구분 3:추정조회, 2:일반조회
 	}
 
-	# 2. API 실행
-	fn_au10002(data=params)
+	# 3. API 실행
+	fn_kt00001(token=MY_ACCESS_TOKEN, data=params)
+
+	# next-key, cont-yn 값이 있을 경우
+	# fn_kt00001(token=MY_ACCESS_TOKEN, data=params, cont_yn='Y', next_key='nextkey..')
 

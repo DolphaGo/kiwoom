@@ -6,7 +6,7 @@ from config import MY_APP_KEY, MY_SECRET_KEY
 # 접근토큰 발급
 def fn_au10001(data):
 	# 1. 요청할 API URL
-	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	# host = 'https://mockapi.kiwoom.com' # 모의투자
 	host = 'https://api.kiwoom.com' # 실전투자
 	endpoint = '/oauth2/token'
 	url =  host + endpoint
