@@ -18,3 +18,5 @@ cp .env.example .env
 brew install qt
 open /opt/homebrew/bin/Designer
 ```
+
+![img.png](images/gui_현재가조회.png)
