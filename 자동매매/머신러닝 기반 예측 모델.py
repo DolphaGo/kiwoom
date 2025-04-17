@@ -14,13 +14,14 @@ test_end = "20250228"
 train_df = stock.get_market_ohlcv_by_date(train_start, train_end, ticker)
 test_df = stock.get_market_ohlcv_by_date(test_start, test_end, ticker)
 
+
 # 2. 전일 기준으로 예측
 def make_supervised_data(df):
-    df_shifted = df.shift(1).dropna()
-    df_target = df['고가'].iloc[1:]  # 다음날 고가
-    X = df_shifted[['시가', '고가', '저가', '종가', '거래량']]
-    y = df_target
+    X = df.shift(1).dropna()[['시가', '고가', '저가', '종가', '거래량']]
+    y = df['고가'].iloc[1:]  # 다음날 고가
+    print(len(X), len(y))
     return X, y
+
 
 X_train, y_train = make_supervised_data(train_df)
 X_test, y_test = make_supervised_data(test_df)
