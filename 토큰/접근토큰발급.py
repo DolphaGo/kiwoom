@@ -1,19 +1,18 @@
 from pathlib import Path
 
 import requests
-from config import MY_APP_KEY, MY_SECRET_KEY
+
+from config import MY_APP_KEY, MY_SECRET_KEY, host
+
 
 # 접근토큰 발급
 def fn_au10001(data):
 	# 1. 요청할 API URL
-	# host = 'https://mockapi.kiwoom.com' # 모의투자
-	host = 'https://api.kiwoom.com' # 실전투자
-	endpoint = '/oauth2/token'
-	url =  host + endpoint
+	url = host + '/oauth2/token'
 
 	# 2. header 데이터
 	headers = {
-		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'Content-Type': 'application/json;charset=UTF-8'
 	}
 
 	# 3. http POST 요청
@@ -31,11 +30,11 @@ import os
 from dotenv import load_dotenv
 
 # env 파일 업데이트 함수
-def update_env_file(key, value, env_file=".env"):
+def update_env_file(key, value):
 	# 현재 파일의 경로를 기준으로 프로젝트 루트 디렉터리의 .env 파일에 업데이트 합니다
 	env_file = Path(__file__).resolve().parent.parent / ".env"
 
-	# .env.example 파일 로드
+	# .env 파일 로드
 	load_dotenv(env_file)
 
 	# 기존 환경 변수 읽기

@@ -1,18 +1,18 @@
-import requests
 import json
-from config import MY_ACCESS_TOKEN, MY_APP_KEY, MY_SECRET_KEY  # 공통 설정 파일에서 토큰 가져오기
+
+import requests
+
+from config import MY_ACCESS_TOKEN, MY_APP_KEY, MY_SECRET_KEY, host
+
 
 # 접근토큰폐기
 def fn_au10002(data):
 	# 1. 요청할 API URL
-	# host = 'https://mockapi.kiwoom.com' # 모의투자
-	host = 'https://api.kiwoom.com' # 실전투자
-	endpoint = '/oauth2/revoke'
-	url =  host + endpoint
+	url = host + '/oauth2/revoke'
 
 	# 2. header 데이터
 	headers = {
-		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'Content-Type': 'application/json;charset=UTF-8'
 	}
 
 	# 3. http POST 요청

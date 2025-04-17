@@ -1,11 +1,10 @@
-from config import MY_ACCESS_TOKEN  # 공통 설정 파일에서 토큰 가져오기
 import asyncio
-import websockets
 import json
 
-# socket 정보
-# SOCKET_URL = 'wss://mockapi.kiwoom.com:10000/api/dostk/websocket'  # 모의투자 접속 URL
-SOCKET_URL = 'wss://api.kiwoom.com:10000/api/dostk/websocket'  # 접속 URL
+import websockets
+
+from config import MY_ACCESS_TOKEN, SOCKET_URL  # 공통 설정 파일에서 토큰 가져오기
+
 
 class WebSocketClient:
     def __init__(self, uri):

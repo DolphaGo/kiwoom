@@ -1,16 +1,13 @@
-import requests
 import json
 
-from config import MY_ACCESS_TOKEN
+import requests
+
+from config import MY_ACCESS_TOKEN, host
 
 
 # 예수금상세현황요청
 def fn_kt00001(token, data, cont_yn='N', next_key=''):
-	# 1. 요청할 API URL
-	#host = 'https://mockapi.kiwoom.com' # 모의투자
-	host = 'https://api.kiwoom.com' # 실전투자
-	endpoint = '/api/dostk/acnt'
-	url =  host + endpoint
+	url = host + '/api/dostk/acnt'
 
 	# 2. header 데이터
 	headers = {
