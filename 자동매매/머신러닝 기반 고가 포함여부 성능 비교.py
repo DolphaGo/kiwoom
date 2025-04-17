@@ -58,5 +58,4 @@ result = pd.DataFrame({
     'R2 Score': [r2_1, r2_2]
 })
 
-print("\n📊 모델 성능 비교:")
 print(result)
