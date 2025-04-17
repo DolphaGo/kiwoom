@@ -19,4 +19,10 @@ brew install qt
 open /opt/homebrew/bin/Designer
 ```
 
+> 현재가 조회 추적
+
 ![img.png](images/gui_현재가조회.png)
+
+> 변동성 돌파 전략
+
+![img.png](images/gui_변동성돌파전략.png)
