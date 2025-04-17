@@ -1,7 +1,6 @@
-from pykrx import stock
-import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
+from pykrx import stock
 
 # 파라미터 설정
 ticker = "005930"  # 삼성전자

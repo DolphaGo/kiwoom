@@ -1,8 +1,7 @@
-from pykrx import stock
-import pandas as pd
-import numpy as np
-from sklearn.ensemble import RandomForestRegressor
 import matplotlib.pyplot as plt
+import pandas as pd
+from pykrx import stock
+from sklearn.ensemble import RandomForestRegressor
 
 # 1. 데이터 불러오기
 ticker = "005930"
