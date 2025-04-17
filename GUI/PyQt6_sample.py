@@ -1,16 +1,16 @@
 import sys
 
-from PyQt5.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget, QLabel, QLineEdit, QHBoxLayout
+from PyQt6.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget, QLabel, QLineEdit, QHBoxLayout
 
 
 def main():
     app = QApplication(sys.argv)
 
     window = QWidget()
-    window.setWindowTitle("PyQt5 Sample")
+    window.setWindowTitle("PyQt6 Sample")
     window.setGeometry(100, 100, 300, 200)
 
-    label = QLabel('Hello, PyQt5!')
+    label = QLabel('Hello, PyQt6!')
 
     lineEdit = QLineEdit()
 
@@ -28,7 +28,7 @@ def main():
     window.setLayout(vbox)
     window.show()
 
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 
 
 if __name__ == '__main__':
