@@ -11,7 +11,7 @@
             </rect>
         </property>
         <property name="windowTitle">
-            <string>MainWindow</string>
+            <string>국장에선 3%만 먹어도 감사하다 By DolphaGo</string>
         </property>
         <widget class="QWidget" name="centralwidget">
             <layout class="QGridLayout" name="gridLayout">
