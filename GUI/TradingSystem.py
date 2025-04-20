@@ -20,14 +20,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.button_start = self.findChild(QPushButton, 'button_start')
         self.button_stop = self.findChild(QPushButton, 'button_stop')
         self.code_list = self.findChild(QLineEdit, 'code_list')
-        self.k_value_input = self.findChild(QLineEdit, 'k_value')
+        self.k_value = self.findChild(QLineEdit, 'k_value')
 
         # 보유 종목 저장
         self.bought = set()
 
         # 타이머 설정
         self.timer = QTimer(self)
-        self.timer.timeout.connect(self.update_prices)
+        self.timer.timeout.connect(self.trading)
 
         # 버튼 이벤트 연결
         self.button_start.clicked.connect(self.start)
@@ -42,24 +42,24 @@ class MainWindow(QtWidgets.QMainWindow):
         self.textboard.append("⛔ 전략 중단됨.")
         self.bought.clear()
 
-    def update_prices(self):
+    def trading(self):
         now = datetime.now()
         current_time = now.strftime("[%H:%M:%S]")
 
-        # 1. K값 입력
+        # 1. K값
         try:
-            k = float(self.k_value_input.text())
+            k = float(self.k_value.text())
         except ValueError:
             self.textboard.append("⚠️ K 값을 올바르게 입력해주세요.")
             return
 
-        # 2. 종목 리스트
         codes = [c.strip() for c in self.code_list.text().split(",") if c.strip()]
         today = now.strftime("%Y%m%d")
         prev_day = stock.get_nearest_business_day_in_a_week(today, prev=True)
+
         for code in codes:
             try:
-                # 2. pykrx로 전일 데이터 가져오기
+                # 2. 전일 데이터 가져오기
                 df = stock.get_market_ohlcv_by_date(prev_day, prev_day, code)
                 if df.empty:
                     continue
@@ -73,23 +73,28 @@ class MainWindow(QtWidgets.QMainWindow):
                 name, current_price = fn_ka10001(code)
                 current_price = float(str(current_price).replace(",", "").strip())
 
-                # 3-1. 로그 출력
                 self.textboard.append(
-                    f"{current_time} [{code}] [{name}] 현재가: {current_price} / 목표가: {round(target, 2)}")
+                    f"{current_time} [{code}] [{name}] 현재가: {current_price} / 목표가: {round(target, 2)}"
+                )
 
                 # 4. 매수 조건
                 if current_price > target and code not in self.bought and now.time() < time(15, 0):
-                    self.bought.add(code)
-                    self.buysell_log.append(f"[매수] [{code}] [{name}] [{current_price}] [1]")
+                    self.buy_stock(code, name, current_price)
 
                 # 5. 15시 이후 매도 조건
                 if code in self.bought and now.time() >= time(15, 0):
-                    self.bought.remove(code)
-                    self.buysell_log.append(f"[매도] [{code}] [{name}] [{current_price}] [1]")
+                    self.sell_stock(code, name, current_price)
 
             except Exception as e:
                 self.textboard.append(f"⚠️ [{code}] 오류 발생: {e}")
 
+    def buy_stock(self, code: str, name: str, price: float):
+        self.bought.add(code)
+        self.buysell_log.append(f"[매수] [{code}] [{name}] [{price}] [1]")
+
+    def sell_stock(self, code: str, name: str, price: float):
+        self.bought.remove(code)
+        self.buysell_log.append(f"[매도] [{code}] [{name}] [{price}] [1]")
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
